@@ -3,8 +3,8 @@ import React, {useState} from 'react';
 import  { Container } from './styles';
 
 
-function PokemonItem({data}) {
-  const[favorite, setFavorite] = useState(false);
+function PokemonItem({data, liked}) {
+  const[favorite, setFavorite] = useState(liked || false);
 
   function handleToggleFavorite(){
     const favoriteList = JSON.parse(localStorage.getItem('@pokedex:favorites')) || [];
@@ -20,14 +20,14 @@ function PokemonItem({data}) {
     setFavorite (!favorite);
   }
 
-  return <Container favorite={favorite}>
-    <img src={data.imageUrl}  alt="bulbasaur"></img>
+  return (<Container favorite={favorite}>
+    <img src={data.imageUrl}  alt={data.name}/>
     <strong>{data.id} - {data.name}</strong>
     <div> 
       <button type="button">Detalhes</button>
-      <button type="button" className="fav" onClick={handleToggleFavorite}>Favoritar</button>
+      <button type="button" className="fav" onClick={handleToggleFavorite}>{favorite ? 'desfavoritar' : 'favoritar'}</button>
     </div>
-  </Container>;
+  </Container>);
 }
 
 export default PokemonItem;
