@@ -1,9 +1,13 @@
 import React from 'react';
 
+import CreateGlobalStyle from './styles/global';
 
 function App() {
   return (
-    <h1>Pokedex</h1>
+    <>
+      <CreateGlobalStyle />
+      <h1>Pokedex</h1>
+    </>
   );
 }
 
