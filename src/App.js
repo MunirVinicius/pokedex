@@ -2,11 +2,13 @@ import React from 'react';
 
 import CreateGlobalStyle from './styles/global';
 
+import Routes from './routes';
+
 function App() {
   return (
     <>
       <CreateGlobalStyle />
-      <h1>Pokedex</h1>
+      <Routes />
     </>
   );
 }
