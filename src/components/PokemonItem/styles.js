@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 export const Container = styled.div`
   width:100%;
@@ -34,11 +34,31 @@ export const Container = styled.div`
             cursor: pointer;
             transition: all 0.4s;
 
+            
+
             &: hover{
                 background: blue;
                 color: #fff;
                 border-color:#fff;
                 font-size: 0.7rem;
+            }
+        }
+
+        .fav{
+            ${(props) => props.favorite && 
+                css`
+                background: blue;
+                color: #fff;
+                border-color:#fff;
+                font-size: 0.7rem;
+
+                &: hover{
+                    background: #fff;
+                    color: blue;
+                    border-color:blue;
+                    font-size: 0.7rem;
+                }
+                `
             }
         }
     }
