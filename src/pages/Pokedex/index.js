@@ -6,6 +6,8 @@ import api from '../../services/api'
 
 import PokemonItem from '../../components/PokemonItem';
 
+import Header from '../../components/Header'
+
 function Pokedex() {
     const [pokemons, setPokemons] = useState([]);
     const [favorites, setFavorites] = useState([]);
@@ -37,7 +39,10 @@ function Pokedex() {
         setFavorites(storagedFavorites.map(({id}) => id));
     }, []);
 
-  return <Container>
+  return (
+    <>
+    <Header />
+    <Container>
       <h1>Pokedex</h1>
       <Wrapper>
           <PokemonList>
@@ -48,6 +53,7 @@ function Pokedex() {
           </PokemonList>
       </Wrapper>
   </Container>
+  </>)
 }
 
 export default Pokedex;

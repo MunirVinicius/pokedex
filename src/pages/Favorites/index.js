@@ -6,10 +6,15 @@ import api from '../../services/api'
 
 import PokemonItem from '../../components/PokemonItem';
 
+import Header from '../../components/Header'
+
 function Favorites() {
     const [pokemons, setPokemons] = useState(JSON.parse(localStorage.getItem('@pokedex:favorites')) || []);
 
-  return <Container>
+  return (
+    <>
+    <Header />
+  <Container>
       <h1>Favorites</h1>
       <Wrapper>
           <PokemonList>
@@ -19,6 +24,7 @@ function Favorites() {
           </PokemonList>
       </Wrapper>
   </Container>
+  </>)
 }
 
 export default Favorites;
