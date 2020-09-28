@@ -8,6 +8,7 @@ import PokemonItem from '../../components/PokemonItem';
 
 function Pokedex() {
     const [pokemons, setPokemons] = useState([]);
+    const [favorites, setFavorites] = useState([]);
 
     useEffect(() =>{
 
@@ -30,6 +31,10 @@ function Pokedex() {
            setPokemons(pokemonList);
         }
         loadPokemons();
+
+        const storagedFavorites = JSON.parse(localStorage.getItem('@pokedex:favorites')) || [];
+
+        setFavorites(storagedFavorites.map(({id}) => id));
     }, []);
 
   return <Container>
@@ -37,7 +42,7 @@ function Pokedex() {
       <Wrapper>
           <PokemonList>
               {pokemons.map(pokemon =>(
-                <PokemonItem key={pokemon.id} data={pokemon} />
+                <PokemonItem key={pokemon.id} data={pokemon} liked={favorites.includes(pokemon.id)}/>
               ))}
 
           </PokemonList>
