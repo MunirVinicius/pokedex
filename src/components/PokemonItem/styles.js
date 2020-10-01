@@ -36,7 +36,7 @@ export const Container = styled.div`
 
             
 
-            &: hover{
+            &:hover{
                 background: blue;
                 color: #fff;
                 border-color:#fff;

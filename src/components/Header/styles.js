@@ -19,7 +19,7 @@ export const Container = styled.header`
             color: black;
             &:hover{
                 color:blue;
-                font-size 1rem;
+                font-size: 1rem;
             }
         }
     }

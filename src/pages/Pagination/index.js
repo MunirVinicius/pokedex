@@ -8,18 +8,14 @@ import apii from '../../services/apii';
 
 import PokemonItem from '../../components/PokemonItem';
 
-import PokemonCard from '../../components/PokemonCard';
-
 import Header from '../../components/Header';
-
-import Pagin from '../../components/Footer';
-
 import { Pagination } from '../../components/Footer/styles';
 
-function Pokedex() {
+function Pokede() {
     const [pokemons, setPokemons] = useState([]);
     const [favorites, setFavorites] = useState([]);
-        useEffect(() =>{
+    useEffect(()=>{
+
         async function loadPokemons(){
             const response = await api.get('/pokemon', {
                 params: {
@@ -54,17 +50,13 @@ function Pokedex() {
       <Wrapper>
           <PokemonList>
               {pokemons.map(pokemon =>(
-                  <>
-                    <PokemonItem key={pokemon.id} data={pokemon} liked={favorites.includes(pokemon.id)}/>
-
-                </>
+                <PokemonItem key={pokemon.id} data={pokemon} liked={favorites.includes(pokemon.id)}/>
               ))}
 
           </PokemonList>
       </Wrapper>
-      <Pagin></Pagin>
   </Container>
   </>)
 }
 
-export default Pokedex;
+export default Pokede;
