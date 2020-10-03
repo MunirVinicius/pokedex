@@ -1,0 +1,23 @@
+li{
+     margin: 0 5px !important; 
+    padding:5px !important;
+
+}
+
+.paginate-container{
+    display: flex;
+    list-style-type:none;
+    margin-top: 10px;
+}
+
+.page-link{
+    padding: 20px;
+}
+
+.page-active {
+    background: blue;
+}
+
+.page-link-active{
+    color:white;
+}

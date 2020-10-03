@@ -1,19 +1,22 @@
 import React, {useState, useEffect} from 'react';
 
+import ReactPaginate from 'react-paginate';
+
 import { Container, Wrapper , PokemonList} from './styles';
 
 import api from '../../services/api';
 
-import apii from '../../services/apii';
 
 import PokemonItem from '../../components/PokemonItem';
 
 import Header from '../../components/Header';
-import { Pagination } from '../../components/Footer/styles';
+
 
 function Pokede() {
     const [pokemons, setPokemons] = useState([]);
     const [favorites, setFavorites] = useState([]);
+    const [pagecount, setPagecount] = useState(0);
+
     useEffect(()=>{
 
         async function loadPokemons(){
@@ -23,7 +26,7 @@ function Pokede() {
                     offset: 0
                 }
             });
-           const {results} = response.data;
+           const {results,count} = response.data;
            const pokemonList = results.map(pokemon =>{
                const id = pokemon.url.match(/\b\d+\b/)[0];
                return {
@@ -33,6 +36,7 @@ function Pokede() {
                    
                }
            })
+           setPagecount(count/ 100);
            setPokemons(pokemonList);
         }
         loadPokemons();
@@ -55,6 +59,15 @@ function Pokede() {
 
           </PokemonList>
       </Wrapper>
+      <ReactPaginate pageCount={pagecount} 
+      pageRangeDisplayed={5}
+      marginPagesDisplayed={0} 
+      pageClassName="page" 
+      containerClassName="paginate-container" 
+      pageLinkClassName="page-link"
+      activeClassName="page-active"
+      activeLinkClassName="page-link-active"
+      />
   </Container>
   </>)
 }

@@ -2,32 +2,39 @@ import React, {useState, useEffect} from 'react';
 
 import { Container, Wrapper , PokemonList} from './styles';
 
+import ReactPaginate from 'react-paginate';
+
 import api from '../../services/api';
 
 import apii from '../../services/apii';
 
 import PokemonItem from '../../components/PokemonItem';
 
-import PokemonCard from '../../components/PokemonCard';
-
 import Header from '../../components/Header';
 
-import Pagin from '../../components/Footer';
+import '../../styles/paginate.css';
 
-import { Pagination } from '../../components/Footer/styles';
+
+
+
 
 function Pokedex() {
     const [pokemons, setPokemons] = useState([]);
     const [favorites, setFavorites] = useState([]);
+    const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
         useEffect(() =>{
         async function loadPokemons(){
+            const offset = 100 * (currentPage - 1);
             const response = await api.get('/pokemon', {
                 params: {
                     limit: 100,
-                    offset: 0
+                    offset
                 }
             });
-           const {results} = response.data;
+
+           const {results, count} = response.data;
+           
            const pokemonList = results.map(pokemon =>{
                const id = pokemon.url.match(/\b\d+\b/)[0];
                return {
@@ -38,13 +45,14 @@ function Pokedex() {
                }
            })
            setPokemons(pokemonList);
+           setPageCount(count / 100);
         }
         loadPokemons();
 
         const storagedFavorites = JSON.parse(localStorage.getItem('@pokedex:favorites')) || [];
 
         setFavorites(storagedFavorites.map(({id}) => id));
-    }, []);
+    }, [currentPage]);
 
   return (
     <>
@@ -62,7 +70,11 @@ function Pokedex() {
 
           </PokemonList>
       </Wrapper>
-      <Pagin></Pagin>
+      <ReactPaginate pageCount={pageCount} 
+      marginPagesDisplayed={0} 
+      pageRangeDisplayed={6} 
+      onPageChange={page  => setCurrentPage(page.selected + 1)}
+      containerClassName="paginate-container"/>
   </Container>
   </>)
 }
